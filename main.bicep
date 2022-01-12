@@ -8,6 +8,19 @@ var tagValues = {
   deploymentDate: currentDate
 }
 
+
+module keyvault 'modules/keyvault.bicep' = {
+  name: 'kv'
+  params: {
+    location: location
+    keyvaultName: 'kv-aignat'
+    keyvaultPleName: 'ple-aignat-kv'
+    subnetId: '${vnet.outputs}/subnets/snet-training'
+    virtualNetworkId: '${vnet.outputs}'
+    tagValues: tagValues
+  }
+}
+
 module sta 'Modules/storageAccount.bicep' = {
   name: 'sta'
   params: {
